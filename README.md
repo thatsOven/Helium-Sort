@@ -49,6 +49,7 @@ Strategies 4A and 4B are fallbacks for when the array does not contain enough it
 - **Strategy 4B**: The algorithm has a fully internal buffer. To better take advantage of it, instead of having `2 ^ ceil(log2(sqrt(n)))` sized blocks like usual, the algorithm will try to resize its blocks to `2 ^ ceil(log2(sqrt(2 * r)))` where `r` is the current size of the subarrays. This allows the algorithm to temporarily split the internal buffer and use it to perform merges, even if it's undersized for normal operation. When having smaller blocks is not possible anymore (because the amount of keys we have is limited), blocks are resized like in strategy 4A, increasing their size until the amount of keys available is enough.
 - In both of these cases, when blocks can't fit in neither the internal or external buffer, the algorithm resorts to naive in-place rotation merges.
 
+The algorithm operates as follows:
 1) If needed, an internal buffer is formed by finding unique items in O(n log n) time worst case.
 2) If the unique items that have been found are less or equal than 8, the algorithm switches to [Strategy 5](#strategy-5---adaptive-lazy-stable-sort).
 2) Runs of a given size are sorted.
