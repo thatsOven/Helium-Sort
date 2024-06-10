@@ -2,9 +2,9 @@
 A block merge sorting algorithm inspired by [Grail Sort](https://github.com/Mrrl/GrailSort/) and focused on adaptivity.
 
 Time complexity:
-    - Best case: O(n)
-    - Average case: O(n log n)
-    - Worst case: O(n log n)
+- Best case: O(n)
+- Average case: O(n log n)
+- Worst case: O(n log n)
 Space complexity is variable, but the algorithm can efficiently run using O(1) memory.
 
 The algorithm extends the concept of adaptivity to memory, by using different strategies based on the amount of memory given to it. 
