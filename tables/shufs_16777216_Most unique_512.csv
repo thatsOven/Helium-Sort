@@ -1,0 +1,7 @@
+16777216_Most unique_512,Wiki Sort (512),Helium Sort (512),Grail Sort (512),Log Sort (512)
+Scrambled head,239144,237938,548563,427288
+Random inputs,1463555,1541640,1641102,588480
+Reverse sorted inputs,290253,307978,486218,553353
+Scrambled tail,236505,243313,547728,405827
+Presorted inputs,37707,24707,353760,361674
+Final merge pass,93199,91369,425846,427174

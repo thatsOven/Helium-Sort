@@ -1,0 +1,7 @@
+16777216_sqrt(n) unique_512,Wiki Sort (512),Helium Sort (512),Grail Sort (512),Log Sort (512)
+Scrambled head,167324,277434,639594,261942
+Random inputs,928903,1718802,1842331,280318
+Reverse sorted inputs,203151,269311,604158,272639
+Scrambled tail,175646,371840,654546,269008
+Presorted inputs,43905,25478,465941,245977
+Final merge pass,71537,108393,471383,256096
