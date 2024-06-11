@@ -96,7 +96,7 @@ The tester and the relative sorts are compiled using `gcc -O3` using GCC 11.4.0 
 
 More graphs and all relative data tables are found in `tables`.
 
-You can run these tests by yourself by compiling `test.c` (using gcc: `gcc -O3 test.c -lm`) and running the result. The program's output can be written inside a `results.txt` file and you can run `csvgen.py` to generate `csv` files that can be easily imported into spreadsheet software.
+You can run these tests by yourself by compiling `test.c` (using gcc: `gcc -O3 test.c -lm`) and running the result. The program's output can be written inside a `result.txt` file and you can run `csvgen.py` to generate `csv` files that can be easily imported into spreadsheet software.
 
 # Conclusions
 As the data shows, Helium Sort manages to consistently outperform Grail Sort, even on random data, where Helium Sort actually wastes comparisons that are usually useful for adaptivity purposes, and manages to perform quite closely to Sqrt Sort, despite it having an advantage since it always uses an amount of external memory. 
