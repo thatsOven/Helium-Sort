@@ -41,10 +41,13 @@ void FN_NAME(HeliumData* self, VAR* array, size_t a, size_t b) {
         #if STRAT4
             #if EXT_BUF && !INT_BUF
                 size_t bLen = self->blockLen;
-                for (; twoR / bLen + 1 > kLen; bLen <<= 1);
-                self->blockLen = bLen;
+                
+                if (twoR / bLen + 1 > kLen) {
+                    do bLen <<= 1; while (twoR / bLen + 1 > kLen);
+                    self->blockLen = bLen;
+                }                
             #else
-                size_t sqrtTwoR = 1;
+                size_t sqrtTwoR = self->blockLen;
                 for (; sqrtTwoR * sqrtTwoR < twoR; sqrtTwoR <<= 1);
 
                 size_t kCnt = twoR / sqrtTwoR + 1;

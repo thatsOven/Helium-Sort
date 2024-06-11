@@ -81,6 +81,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #define MAX_STRAT5_UNIQUE 8
 #define MIN_REV_RUN_SIZE  8
 #define SMALL_MERGE       16
+#define SQRT_TWOR         8 // 2^ceil(log2(sqrt(2 * RUN_SIZE)))
 
 typedef struct HeliumData HeliumData;
 
@@ -755,10 +756,11 @@ void heliumSort(VAR* array, size_t a, size_t b, size_t mem) {
             strat3CLoop(&self, array, a, e);
         }
     } else {
-        self.bufLen = keysFound;
-        self.keyLen = keysFound;
-        self.bufPos = e;
-        self.keyPos = e;
+        self.blockLen = SQRT_TWOR;
+        self.bufLen   = keysFound;
+        self.keyLen   = keysFound;
+        self.bufPos   = e;
+        self.keyPos   = e;
 
         if (hasMem) {
             if (keysFound > (mem << 1)) self.rotate = rotateInPlace;
