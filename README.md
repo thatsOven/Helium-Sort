@@ -14,7 +14,7 @@ To see Helium Sort's practical performance, jump to [Benchmarks](#benchmarks).
 
 ## Usage
 - Include `heliumSort.h` in your project and define VAR element type and CMP comparison function.
-- Call `heliumSort(array, start, end, memory)` to sort `array`. Memory can be set to 0, 1, 2, 3, and 4 to make Helium Sort run in its default modes (respectively, Strategies 3C or 4B, 1, 2, 3B or 4A). 
+- Call `heliumSort(array, start, end, memory)` to sort `array`. Memory can be set to 0, 1, 2, 3, and 4 to make Helium Sort run in its default modes (respectively, Strategies 3C or 4B, 1, 2, 3A, 3B or 4A). 
 
 # Algorithm
 The algorithm proceeds as follows:
