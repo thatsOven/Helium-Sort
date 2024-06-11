@@ -19,7 +19,7 @@ To see Helium Sort's practical performance, jump to [Benchmarks](#benchmarks).
 # Algorithm
 The algorithm proceeds as follows:
 1) Reverse runs and scan for sortedness: 
-    - Helium Sort starts of by scanning the array for reverse-sorted runs, and if it finds any which can be safely reversed without exchaning the order of equal elements, it does, so it can later exploit the presence of sorted segments to skip portions of the sorting procedure. The array is then scanned backwards for sortedness. This is used to reduce the range in which the initial run sorting is performed, or to significantly improve the performance of the key finding routine.
+    - Helium Sort starts of by scanning the array for reverse-sorted runs, and if it finds any which can be safely reversed without exchaning the order of equal elements, it does, so it can later exploit the presence of sorted segments to skip portions of the sorting procedure. The array is then scanned backwards for sortedness. This is used to reduce the range in which the initial run sorting is performed, or to significantly improve the performance of the key finding routine. If the array is already sorted at this stage, the algorithm simply returns.
 2) Strategy selection: based on the amounts of memory the algorithm is allowed to use and the contents of the original array, Helium Sort will pick a different strategy:
     - **Memory >= n / 2**: [Uranium Mode (Strategy 1)](#uranium-mode)
     - **Memory >= 2 ^ ceil(log2(sqrt(n))) + 2n / (2 ^ ceil(log2(sqrt(n))))**: [Hydrogen Mode (Strategy 2)](#hydrogen-mode)
