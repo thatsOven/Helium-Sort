@@ -72,7 +72,7 @@ Different block merge sorting algorithms use different block merging schemes dep
 
 # Adaptive optimizations
 Helium Sort uses a number of different tricks to improve its adaptivity, but most notably:
-- Every merge is simplified to a naive in-place merge routine in case of small subarrays (<= 16 items) to avoid copying data to a buffer, which usually results in accesses beyond
+- Every merge is simplified to a naive in-place merge routine in case of small subarrays (<= 4 items) to avoid copying data to a buffer, which usually results in accesses beyond
 cache bounds, hence creating cache misses.
 - Each merge routine also uses two techniques that allow it to skip merging parts of the subarray, or skipping merging altogether:
     - Bounds checking: consists in checking the upper and lower bounds of the subarrays to merge to figure out if they are already in the correct order, or if they might need to be exchanged;

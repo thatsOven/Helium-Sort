@@ -80,7 +80,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #define MIN_SORTED_UNIQUE 8
 #define MAX_STRAT5_UNIQUE 8
 #define MIN_REV_RUN_SIZE  8
-#define SMALL_MERGE       16
+#define SMALL_MERGE       4
 #define SQRT_TWOR         8 // 2^ceil(log2(sqrt(2 * RUN_SIZE)))
 
 typedef struct HeliumData HeliumData;
@@ -245,7 +245,7 @@ inline char optiMerge(HeliumData* self, VAR* array, size_t a, size_t m, size_t b
     return optiSmartMergeLeft(self, array, a, m, b);
 }
 
-inline void getBlocksIndices(HeliumData* self, size_t* indices, VAR* array, size_t a, size_t leftBlocks, size_t rightBlocks, size_t blockLen) {
+inline void getBlocksIndices(size_t* indices, VAR* array, size_t a, size_t leftBlocks, size_t rightBlocks, size_t blockLen) {
     size_t l = 0,
            m = leftBlocks,
            r = m,
@@ -286,7 +286,7 @@ inline void blockCycle(HeliumData* self, VAR* array, size_t* indices, size_t a, 
 
     VAR* extBuf = self->extBuf;
 
-    for (int i = 0; i < total; i++) {
+    for (size_t i = 0; i < total; i++) {
         if (i != indices[i]) {
             memcpy(extBuf, array + a + i * blockLen, blockLen * sizeof(VAR));
             size_t j = i,
@@ -317,7 +317,7 @@ void hydrogenCombine(HeliumData* self, VAR* array, size_t a, size_t m, size_t b)
            frag        = (b - a) - blockQty * blockLen;
 
     size_t* indices = self->indices;
-    getBlocksIndices(self, indices, array, a, leftBlocks, rightBlocks, blockLen);
+    getBlocksIndices(indices, array, a, leftBlocks, rightBlocks, blockLen);
     memcpy(self->keys, indices, blockQty * sizeof(size_t));
 
     blockCycle(self, array, indices, a, leftBlocks, rightBlocks, blockLen);
