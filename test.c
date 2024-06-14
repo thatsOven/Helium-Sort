@@ -84,8 +84,8 @@ int cmp_int0(const void * a, const void * b) {
 }
 
 #include <stdbool.h>
-#define SORT_TYPE int
-#define SORT_CMP cmp_int0
+#define SORT_TYPE VAR
+#define SORT_CMP CMP
 
 #include "other_sorts/GrailSort.h"
 #include "other_sorts/SqrtSort.h"
@@ -120,8 +120,12 @@ void sqrtsortTest(VAR *a, size_t n, size_t b) {
 	SqrtSort(a, n);
 }
 
-bool wikicmp(int a, int b) {
-	return a < b;
+bool wikicmp(VAR a, VAR b) {
+    #if STABILITY_CHECK
+        return a.value < b.value;
+    #else
+        return a < b;
+    #endif
 }
 
 void wikisortTest(VAR *a, size_t n, size_t b) {
@@ -351,7 +355,7 @@ int main() {
                    maxS = 63 - __builtin_clzll(len) - MAX_SHIFTS_M,
                    shfs = MIN_SHIFTS + (rand() % maxS);
 
-            runTests(array, testArray, reference, sorts, names, len, shfs);
+            runTests(array, testArray, reference, sorts, names, autoMem, len, shfs);
         }
     #else
         printf("Few unique | ");

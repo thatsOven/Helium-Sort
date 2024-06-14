@@ -184,6 +184,17 @@ size_t binarySearchRight(VAR* array, size_t a, size_t b, VAR* value);
     a = binarySearchRight(array, a, m - 1, array + m    ); \
     b = binarySearchLeft( array, m, b    , array + m - 1); 
 
+
+#define COMBINE_REDUCE(self, array, a, m, b, blockLen)    \
+    CHECK_BOUNDS(self, array, a, m, b);                   \
+    size_t oldA = a;                                      \
+    REDUCE_BOUNDS(array, a, m, b);                        \
+    if (optiSmartMergeLeft(self, array, a, m, b)) return; \
+                                                          \
+    size_t newL = ((m - a) / blockLen + 1) * blockLen;    \
+    if (a + newL > m) a = oldA;                           \
+    else              a = m - newL;                       \
+
 void insertSort(VAR* array, size_t a, size_t b) {
     for (size_t i = a + 1; i < b; i++)
         if (CMP(array + i, array + i - 1) < 0)
@@ -238,11 +249,6 @@ inline void mergeOOP(HeliumData* self, VAR* array, size_t a, size_t m, size_t b)
         if (ll <= SMALL_MERGE) mergeInPlaceFWLeft(self, array, a, m, b);
         else                   mergeOOPFWLeft(self, array, a, m, b);
     }
-}
-
-inline char optiMerge(HeliumData* self, VAR* array, size_t a, size_t m, size_t b) {
-    REDUCE_BOUNDS(array, a, m, b);
-    return optiSmartMergeLeft(self, array, a, m, b);
 }
 
 inline void getBlocksIndices(size_t* indices, VAR* array, size_t a, size_t leftBlocks, size_t rightBlocks, size_t blockLen) {
@@ -307,11 +313,10 @@ inline void blockCycle(HeliumData* self, VAR* array, size_t* indices, size_t a, 
 }
 
 void hydrogenCombine(HeliumData* self, VAR* array, size_t a, size_t m, size_t b) {
-    CHECK_BOUNDS(self, array, a, m, b);
-    if (optiMerge(self, array, a, m, b)) return;
+    size_t blockLen = self->blockLen;
+    COMBINE_REDUCE(self, array, a, m, b, blockLen);
 
-    size_t blockLen    = self->blockLen,
-           leftBlocks  = (m - a) / blockLen,
+    size_t leftBlocks  = (m - a) / blockLen,
            rightBlocks = (b - m) / blockLen,
            blockQty    = leftBlocks + rightBlocks,
            frag        = (b - a) - blockQty * blockLen;

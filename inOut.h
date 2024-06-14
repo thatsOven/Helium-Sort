@@ -176,11 +176,10 @@ inline void IN_OUT_FN(mergeBlocks)(HeliumData* self, VAR* array, size_t a, K_TYP
 #undef K_TYPE
 
 void IN_OUT_FN(heliumCombine)(HeliumData* self, VAR* array, size_t a, size_t m, size_t b) {
-    CHECK_BOUNDS(self, array, a, m, b);
-    if (optiMerge(self, array, a, m, b)) return;
+    size_t blockLen = self->blockLen;
+    COMBINE_REDUCE(self, array, a, m, b, blockLen);
 
-    size_t blockLen    = self->blockLen,
-           leftBlocks  = (m - a) / blockLen,
+    size_t leftBlocks  = (m - a) / blockLen,
            rightBlocks = (b - m) / blockLen,
            blockQty    = leftBlocks + rightBlocks,
            frag        = (b - a) - blockQty * blockLen;
