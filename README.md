@@ -12,6 +12,8 @@ The algorithm extends the concept of adaptivity to memory, by using different st
 
 To see Helium Sort's practical performance, jump to [Benchmarks](#benchmarks).
 
+A visualization of the algorithm over different inputs and using different strategies is available [here](https://youtu.be/aQCb2q4O80A)
+
 ## Usage
 - Include `heliumSort.h` in your project and define VAR element type and CMP comparison function.
 - Call `heliumSort(array, start, end, memory)` to sort `array`. Memory can be set to 0, 1, 2, 3, and 4 to make Helium Sort run in its default modes (respectively, Strategies 3C or 4B, 1, 2, 3A, 3B or 4A). 
